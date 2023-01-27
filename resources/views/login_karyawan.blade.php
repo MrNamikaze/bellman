@@ -1,0 +1,63 @@
+@extends('layouts.auth')
+
+@section('main-content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-5 col-lg-6 col-md-4">
+            <center><h1 style="color: white; width: 100%; height: 100%">PT. Ken Logistik</h1></center>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Login Karyawan') }}</h1>
+                                </div>
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger border-left-danger" role="alert">
+                                        <ul class="pl-4 my-2">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <form method="POST" action="{{route('karyawan.vertif')}}" class="user">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="no_wa_kurir" placeholder="No Whatsapp" required autofocus>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="remember">{{ __('Remember Me') }}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            {{ __('Login') }}
+                                        </button>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                        <a class="small" href="{{ route('login') }}">{{ __('Login sebagai admin') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
